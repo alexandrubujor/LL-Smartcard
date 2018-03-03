@@ -23,7 +23,7 @@ def process_card(connection, options):
 
 
     # Try sending a valid PIN
-    PIN = "1234"
+    PIN = "1213"
     PIN_DATA = []
     for c in PIN:
         PIN_DATA.append(ord(c))
@@ -31,18 +31,18 @@ def process_card(connection, options):
     PIN_DATA2 = list(PIN_DATA)
     PIN_DATA2[0] = 0x30
     
-    print "Set PIN data:"
-    print PIN
-    print PIN_DATA
+    print("Set PIN data:")
+    print(PIN)
+    print(PIN_DATA)
 
 
     # try global pin
-    print "TRYING GLOBAL PIN"
+    print("TRYING GLOBAL PIN")
     (data, sw1, sw2) = card.apdu_verify_pin([], 0x00, 0)
     (data, sw1, sw2) = card.apdu_verify_pin(PIN_DATA, 0x00)
 
 
-    print "\n\n\n"
+    print("\n\n\n")
 
     
 ##    # Lock Card
@@ -53,7 +53,7 @@ def process_card(connection, options):
 #        (data, sw1, sw2) = card.apdu_reset_retry_counter(PIN_DATA, 0x80, PIN_DATA)
 
 
-    print "Opening Secure Channel"
+    print("Opening Secure Channel")
     
     # Select GP Manager
     card.apdu_select_application(APDU.APPLET.SECURITY_GEMALTO)
@@ -64,13 +64,13 @@ def process_card(connection, options):
 
 
     # Reset our retry counter
-    print "Resetting retry counter..."
+    print("Resetting retry counter...")
 #    card.apdu_change_reference_data(0x00, [], PIN_DATA, first=True)
     card.apdu_change_reference_data(0x80, PIN_DATA, PIN_DATA)
     card.apdu_reset_retry_counter(PIN_DATA, 0x80, PIN_DATA)
 
     # Print applications on the card
-    print "Printing card applications..."
+    print("Printing card applications...")
     card.print_applications()
 
 

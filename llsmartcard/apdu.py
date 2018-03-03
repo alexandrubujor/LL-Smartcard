@@ -26,7 +26,7 @@ class SECURE_CHANNEL:
     class MODE:
         NONE = 0x00
         MAC = 0X01
-        MAC_ENC = 03
+        MAC_ENC = 0o03
 
 
 class SET_STATUS_PARAM:
